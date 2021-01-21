@@ -1,0 +1,25 @@
+﻿@model news
+<section id="contact" class="contact">
+    <div class="container">
+            <div class="col-lg-6">
+                <form asp-action="AddNews" method="post">
+                    <div class="form-group mt-3">
+                        <input type="text" class="form-control" asp-for="title" placeholder="Title" data-rule="minlen:4" data-msg="Please enter at least 8 chars of title" />
+                        <div class="validate"></div>
+                    </div>
+                    <div class="form-group mt-3">
+                        <textarea class="form-control" asp-for="topic" rows="5" data-rule="required"  placeholder="Topic"></textarea>
+                        <div class="validate"></div>
+                    </div>
+                    <div class="form-group mt-3">
+                        <textarea class="form-control" asp-for="Category.name" rows="5" data-rule="required"  placeholder="Category"></textarea>
+                        <div class="validate"></div>
+                    </div>
+                    <div class="text-center"><button type="submit">ِAdd</button></div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</section><!-- End Contact Section -->

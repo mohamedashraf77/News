@@ -1,0 +1,22 @@
+﻿<section id="contact" class="contact">
+    <div class="container">
+        <div class="col-lg-6">
+            <form asp-action="EditeNews" method="post">
+                <div class="form-group mt-3">
+                    <input type="text" class="form-control" name="title"  placeholder="@Model.title" data-rule="minlen:4" data-msg="Please enter at least 8 chars of title" />
+                    <div class="validate"></div>
+                </div>
+                <div class="form-group mt-3">
+                    <textarea class="form-control" name="topic"  rows="5" data-rule="required" placeholder="@Model.topic"></textarea>
+                    <div class="validate"></div>
+                </div>
+                <div class="form-group mt-3">
+                    <textarea class="form-control" name="category"  rows="5" data-rule="required" placeholder="@Model.Category.name"></textarea>
+                    <div class="validate"></div>
+                </div>
+                <div class="text-center"><button type="submit" name="id" value="@Model.ID">ِupdate</button></div>
+            </form>
+        </div>
+
+    </div>
+</section>
