@@ -12,17 +12,17 @@ namespace News.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        NewsContext DataBaseContext;
+        NewsContext dataBaseContext;
 
         public HomeController(ILogger<HomeController> logger, NewsContext context)
         {
             _logger = logger;
-            DataBaseContext = context;
+            dataBaseContext = context;
         }
         
         public IActionResult Index()
         { 
-            return View(DataBaseContext.categories.ToList());
+            return View(dataBaseContext.Categories.ToList());
         }
         
         //Action to handle Contuct us view 
@@ -35,8 +35,8 @@ namespace News.Controllers
         [HttpPost]
         public IActionResult SaveContuct(ContactUs model)
         {
-            DataBaseContext.ContactUs.Add(model);
-            DataBaseContext.SaveChanges();
+            dataBaseContext.ContactUs.Add(model);
+            dataBaseContext.SaveChanges();
             return RedirectToAction("ContuctUs");
         }
         //Action to handle Admin view
@@ -48,12 +48,12 @@ namespace News.Controllers
         //Action to handle News view
         public IActionResult News(int id)
         {
-            var result = DataBaseContext.news.Where(n => n.CategoryID == id).ToList();
+            var result = dataBaseContext.News.Where(n => n.CategoryID == id).ToList();
             return View(result);
         }
 
         //Action to handle Contuct us view
-        public IActionResult login()
+        public IActionResult Login()
         { 
             return View();
         }
@@ -61,10 +61,10 @@ namespace News.Controllers
         //Action to check if user name and password are correct
         public IActionResult CheckLogin(Admin model)
         {
-            var member = DataBaseContext.Admin.Where(t => t.mail == model.mail).ToList();
+            var member = dataBaseContext.Admin.Where(t => t.Mail == model.Mail).ToList();
             if (member.Count == 0)
                 return RedirectToAction("LoginError");
-            else if (member[0].password == model.password)
+            else if (member[0].Password == model.Password)
                 return RedirectToAction("Admin");
             else
                 return RedirectToAction("LoginError");
@@ -80,59 +80,59 @@ namespace News.Controllers
             return View();
         }
         //Action to insert new news
-        public IActionResult AddNews(news model)
+        public IActionResult AddNews(Models.News model)
         {
-            model.date = DateTime.Now;
-            var category = DataBaseContext.categories.Where(c => c.name == model.Category.name).ToList();
+            model.Date = DateTime.Now;
+            var category = dataBaseContext.Categories.Where(c => c.Name == model.Category.Name).ToList();
             model.CategoryID = category[0].ID;
             model.Category = null;
-            DataBaseContext.Add(model);
-            DataBaseContext.SaveChanges();
+            dataBaseContext.Add(model);
+            dataBaseContext.SaveChanges();
             return RedirectToAction("Admin");
         }
 
         //Action to response by view that let admin to delete an news
         public IActionResult Delete()
         {
-            return View(DataBaseContext.news.ToList());
+            return View(dataBaseContext.News.ToList());
         }
         [HttpPost]
         //Action to delet an news
-        public IActionResult remove(int id)
+        public IActionResult Remove(int id)
         {
-            var removed_news = DataBaseContext.news.Where(n => n.ID==id).FirstOrDefault();
-            DataBaseContext.news.Remove(removed_news);
-            DataBaseContext.SaveChanges();
+            var removed_news = dataBaseContext.News.Where(n => n.ID==id).FirstOrDefault();
+            dataBaseContext.News.Remove(removed_news);
+            dataBaseContext.SaveChanges();
             return RedirectToAction("Delete");
         }
         
         //Action to response by view that let admin to update new news
-        public IActionResult update()
+        public IActionResult Update()
         {
-            return View(DataBaseContext.news.ToList());
+            return View(dataBaseContext.News.ToList());
         }
         [HttpPost]
-        public IActionResult edite(int id)
+        public IActionResult Edite(int id)
         {
-            var updated_news = DataBaseContext.news.Where(n => n.ID == id).FirstOrDefault();
-            var cat = DataBaseContext.categories.Where(c => c.ID == updated_news.CategoryID).FirstOrDefault();
+            var updated_news = dataBaseContext.News.Where(n => n.ID == id).FirstOrDefault();
+            var cat = dataBaseContext.Categories.Where(c => c.ID == updated_news.CategoryID).FirstOrDefault();
             updated_news.Category = cat;
             return View(updated_news);
         }
         public IActionResult EditeNews(int id, string title, string topic, string category)
         {
-            var updated_news = DataBaseContext.news.Where(n => n.ID == id).FirstOrDefault();
+            var updated_news = dataBaseContext.News.Where(n => n.ID == id).FirstOrDefault();
             if(title != null)
-                updated_news.title = title;
+                updated_news.Title = title;
             if(topic != null)
-                updated_news.topic = topic;
+                updated_news.Topic = topic;
             if(category != null)
             {
-                updated_news.CategoryID = DataBaseContext.categories.Where(c => c.name == category).FirstOrDefault().ID;
+                updated_news.CategoryID = dataBaseContext.Categories.Where(c => c.Name == category).FirstOrDefault().ID;
                 updated_news.Category = null;
             }
-            DataBaseContext.news.Update(updated_news);
-            DataBaseContext.SaveChanges();
+            dataBaseContext.News.Update(updated_news);
+            dataBaseContext.SaveChanges();
             return RedirectToAction("update");
         }
 

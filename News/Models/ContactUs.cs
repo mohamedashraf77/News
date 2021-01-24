@@ -9,8 +9,8 @@ namespace News.Models
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public string message { get; set; }
-        public string mail { get; set; }
-        public string subject { get; set; }
+        public string Message { get; set; }
+        public string Mail { get; set; }
+        public string Subject { get; set; }
     }
 }

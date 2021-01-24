@@ -5,15 +5,15 @@ using System.Threading.Tasks;
 
 namespace News.Models
 {
-    public class category
+    public class Category
     {
         public int ID { get; set; }
-        public string name { get; set; }
-        public string description { get; set; }
-        public List<news> news { get; set; }
-        public category()
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public List<News> News { get; set; }
+        public Category()
         {
-            news = new List<news>();
+            News = new List<News>();
         }
     }
 }

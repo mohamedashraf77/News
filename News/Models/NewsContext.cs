@@ -12,9 +12,9 @@ namespace News.Models
         {
 
         }
-        public DbSet<category> categories { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public DbSet<ContactUs> ContactUs { get; set; }
-        public DbSet<news> news  { get; set; }
+        public DbSet<News> News { get; set; }
         public DbSet<Admin> Admin { get; set; }
     }
 }

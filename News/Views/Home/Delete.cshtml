@@ -9,12 +9,12 @@
                 </div>
 
                 <div class="col-lg-6 pt-4 pt-lg-0 content" data-aos="fade-left">
-                    <h3>@item.title</h3>
+                    <h3>@item.Title</h3>
                     <p>
-                        @item.topic
+                        @item.Topic
                     </p>
                     <div class="text-center">
-                        <form asp-action="remove" method="post">
+                        <form asp-action="Remove" method="post">
                             <button type ="submit" name="id" value="@item.ID">ِDelete</button>
                             </form>
                     </div>
