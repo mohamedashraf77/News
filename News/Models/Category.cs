@@ -7,13 +7,13 @@ namespace News.Models
 {
     public class Category
     {
-        public int id { get; set; }
-        public string name { get; set; }
-        public string description { get; set; }
-        public List<News> news { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public List<News> News { get; set; }
         public Category()
         {
-            news = new List<News>();
+            News = new List<News>();
         }
     }
 }

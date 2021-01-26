@@ -7,10 +7,10 @@ namespace News.Models
 {
     public class Admin
     {
-        public int id { get; set; }
-        public string name { get; set; }
-        public string job { get; set; }
-        public string mail { get; set; }
-        public string password { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Job { get; set; }
+        public string Mail { get; set; }
+        public string Password { get; set; }
     }
 }

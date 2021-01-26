@@ -22,7 +22,7 @@ namespace News.Controllers
         
         public IActionResult Index()
         { 
-            return View(dataBaseContext.categories.ToList());
+            return View(dataBaseContext.Categories.ToList());
         }
         
         //Action to handle Contuct us view 
@@ -35,7 +35,7 @@ namespace News.Controllers
         [HttpPost]
         public IActionResult SaveContuct(ContactUs model)
         {
-            dataBaseContext.contactUs.Add(model);
+            dataBaseContext.ContactUs.Add(model);
             dataBaseContext.SaveChanges();
             return RedirectToAction("ContuctUs");
         }
@@ -48,7 +48,7 @@ namespace News.Controllers
         //Action to handle News view
         public IActionResult News(int id)
         {
-            var result = dataBaseContext.news.Where(n => n.categoryID == id).ToList();
+            var result = dataBaseContext.News.Where(n => n.CategoryId == id).ToList();
             return View(result);
         }
 
@@ -61,10 +61,10 @@ namespace News.Controllers
         //Action to check if user name and password are correct
         public IActionResult CheckLogin(Admin model)
         {
-            var member = dataBaseContext.admin.Where(t => t.mail == model.mail).ToList();
+            var member = dataBaseContext.Admin.Where(t => t.Mail == model.Mail).ToList();
             if (member.Count == 0)
                 return RedirectToAction("LoginError");
-            else if (member[0].password == model.password)
+            else if (member[0].Password == model.Password)
                 return RedirectToAction("Admin");
             else
                 return RedirectToAction("LoginError");
@@ -82,10 +82,10 @@ namespace News.Controllers
         //Action to insert new news
         public IActionResult AddNews(Models.News model)
         {
-            model.date = DateTime.Now;
-            var category = dataBaseContext.categories.Where(c => c.name == model.category.name).ToList();
-            model.categoryID = category[0].id;
-            model.category = null;
+            model.Date = DateTime.Now;
+            var category = dataBaseContext.Categories.Where(c => c.Name == model.Category.Name).ToList();
+            model.CategoryId = category[0].Id;
+            model.Category = null;
             dataBaseContext.Add(model);
             dataBaseContext.SaveChanges();
             return RedirectToAction("Admin");
@@ -94,14 +94,14 @@ namespace News.Controllers
         //Action to response by view that let admin to delete an news
         public IActionResult Delete()
         {
-            return View(dataBaseContext.news.ToList());
+            return View(dataBaseContext.News.ToList());
         }
         [HttpPost]
         //Action to delet an news
         public IActionResult Remove(int id)
         {
-            var removed_news = dataBaseContext.news.Where(n => n.id==id).FirstOrDefault();
-            dataBaseContext.news.Remove(removed_news);
+            var removed_news = dataBaseContext.News.Where(n => n.Id==id).FirstOrDefault();
+            dataBaseContext.News.Remove(removed_news);
             dataBaseContext.SaveChanges();
             return RedirectToAction("Delete");
         }
@@ -109,29 +109,29 @@ namespace News.Controllers
         //Action to response by view that let admin to update new news
         public IActionResult Update()
         {
-            return View(dataBaseContext.news.ToList());
+            return View(dataBaseContext.News.ToList());
         }
         [HttpPost]
         public IActionResult Edite(int id)
         {
-            var updated_news = dataBaseContext.news.Where(n => n.id == id).FirstOrDefault();
-            var cat = dataBaseContext.categories.Where(c => c.id == updated_news.categoryID).FirstOrDefault();
-            updated_news.category = cat;
+            var updated_news = dataBaseContext.News.Where(n => n.Id == id).FirstOrDefault();
+            var cat = dataBaseContext.Categories.Where(c => c.Id == updated_news.CategoryId).FirstOrDefault();
+            updated_news.Category = cat;
             return View(updated_news);
         }
         public IActionResult EditeNews(int id, string title, string topic, string category)
         {
-            var updated_news = dataBaseContext.news.Where(n => n.id == id).FirstOrDefault();
+            var updated_news = dataBaseContext.News.Where(n => n.Id == id).FirstOrDefault();
             if(title != null)
-                updated_news.title = title;
+                updated_news.Title = title;
             if(topic != null)
-                updated_news.topic = topic;
+                updated_news.Topic = topic;
             if(category != null)
             {
-                updated_news.categoryID = dataBaseContext.categories.Where(c => c.name == category).FirstOrDefault().id;
-                updated_news.category = null;
+                updated_news.CategoryId = dataBaseContext.Categories.Where(c => c.Name == category).FirstOrDefault().Id;
+                updated_news.Category = null;
             }
-            dataBaseContext.news.Update(updated_news);
+            dataBaseContext.News.Update(updated_news);
             dataBaseContext.SaveChanges();
             return RedirectToAction("update");
         }
