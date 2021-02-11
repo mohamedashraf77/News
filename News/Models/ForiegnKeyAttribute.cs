@@ -4,11 +4,11 @@ namespace News.Models
 {
     internal class ForiegnKeyAttribute : Attribute
     {
-        private string v;
+        private string _foriegnKeyName;
 
-        public ForiegnKeyAttribute(string v)
+        public ForiegnKeyAttribute(string foriegnKeyName)
         {
-            this.v = v;
+            this._foriegnKeyName = foriegnKeyName;
         }
     }
 }
